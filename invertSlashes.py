@@ -20,10 +20,10 @@ def init() -> None:
     print(f'Current working directory: {cwd}\\')
     print('-'*50)
 
-    print(checkSlash())
+    print(check_slash())
 
 
-def getFileName() -> str:
+def get_file_name() -> str:
     """
     Request the data files and perform error handling
     """
@@ -62,27 +62,27 @@ def getFileName() -> str:
     return file_name
 
 
-def getPath() -> str:
+def get_path() -> str:
     """
     Get the physical file 
 
     Could be extended to change file contents
     """
 
-    file_name = getFileName()
+    file_name = get_file_name()
 
     path = f'{cwd}\\{file_name}'
 
     return path
 
 
-def checkSlash() -> str:
+def check_slash() -> str:
     """
     Check for the most common type of slashes in a string
     Invert that slash
     """
 
-    path = getPath()
+    path = get_path()
     fSCount = 0
     bSCount = 0
 
