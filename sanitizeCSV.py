@@ -54,17 +54,14 @@ def get_file_path() -> str:
 
             if path_flag == 'a':
                 if not os.path.exists(file_path):
-                    raise ValueError('No file found')
+                    raise FileNotFoundError('No file found')
 
             if path_flag == 'r':
                 if not os.path.exists(f'{cwd}\{file_path}'):
-                    raise ValueError('No file found')
+                    raise FileNotFoundError('No file found')
         
 
-        except TypeError as e:
-            print(e)
-
-        except ValueError as e:
+        except (TypeError, ValueError, FileNotFoundError) as e:
             print(e)
 
         else:
@@ -87,12 +84,27 @@ def check_file_path() -> tuple:
     with open(file=file_path, mode='r+') as file:
         lines = file.readlines()
 
-        last_letter = ''
+        last_letter = False
+        s = []
+        t = []
+
         for line in lines:
             for letter in line:
+
                 if letter == ';':
-                    pass
-                    
+                    last_letter = True
+
+                if last_letter and letter == ';':
+                    s.append(letter)
+
+                if last_letter and not letter == ';':
+                    last_letter = 0
+
+            t.append(letter)
+
+        print(s)  
+        print(t)  
+
 
                     
 
