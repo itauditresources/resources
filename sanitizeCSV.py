@@ -82,25 +82,28 @@ def check_file_path() -> tuple:
     file_path = get_file_path()
 
     with open(file=file_path, mode='r+') as file:
-        lines = file.readlines()
+        lines = file.read()
 
         last_letter = False
+        i = 0
         s = []
         t = []
 
-        for line in lines:
-            for letter in line:
+        for letter in lines:
 
-                if letter == ';':
-                    last_letter = True
 
-                if last_letter and letter == ';':
-                    s.append(letter)
+            if last_letter and letter == ';':
+                s.append(letter)
 
-                if last_letter and not letter == ';':
-                    last_letter = 0
+            if last_letter and not letter == ';':
+                last_letter = False
 
-            t.append(letter)
+                t.append(letter)
+
+            if letter == ';':
+                last_letter = True
+
+            i = i + 1
 
         print(s)  
         print(t)  
